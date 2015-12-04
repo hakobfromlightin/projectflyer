@@ -8300,6 +8300,10 @@ button.close {
   }
 }
 
+.form-control {
+  height: 39px;
+}
+
 body {
   padding-top: 70px;
 }
