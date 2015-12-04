@@ -4,6 +4,11 @@ namespace App\Http\Utilities;
 
 class Country {
 
+    /**
+     * A list of countries with short names
+     *
+     * @var array
+     */
     protected static $countries =
         [
             "United States" => "us",
@@ -246,6 +251,11 @@ class Country {
             "Zimbabwe" => "zw"
         ];
 
+    /**
+     * Get all countries.
+     *
+     * @return array
+     */
     public static function all()
     {
         return static::$countries;

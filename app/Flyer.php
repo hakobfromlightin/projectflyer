@@ -8,7 +8,7 @@ class Flyer extends Model
 {
 
     /**
-     * Fillable fields for a flyer.
+     * Fillable fields for the flyer model.
      *
      * @var array
      */

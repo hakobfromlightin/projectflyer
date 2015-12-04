@@ -8,8 +8,6 @@
 </head>
 <body>
 
-@include('flash')
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -38,5 +36,8 @@
 </div>
 
 <script src="/js/libs.js"></script>
+
+@include('flash')
+
 </body>
 </html>

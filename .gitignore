@@ -1,5 +1,6 @@
 /vendor
 /node_modules
+composer.phar
 Homestead.yaml
 Homestead.json
 .env
