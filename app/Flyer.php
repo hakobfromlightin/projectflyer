@@ -22,6 +22,11 @@ class Flyer extends Model
         'description'
     ];
 
+    public function getPriceAttribute($price)
+    {
+        return '$' . number_format($price);
+    }
+
     /**
      * A flyer is composed of many photos.
      *
@@ -30,5 +35,19 @@ class Flyer extends Model
     public function photos()
     {
         return $this->hasMany('App\Photo');
+    }
+
+    /**
+     * Scope query to those located at a given address.
+     *
+     * @param Builder $query
+     * @param string $zip
+     * @param string $street
+     * @return mixed
+     */
+    public function scopeLocatedAt($query, $zip, $street)
+    {
+        $street = str_replace('-', ' ', $street);
+        return $query->where(compact('zip', 'street'));
     }
 }

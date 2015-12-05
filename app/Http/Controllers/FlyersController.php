@@ -49,12 +49,16 @@ class FlyersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param $zip
+     * @param $street
      * @return \Illuminate\Http\Response
+     * @internal param int $id
      */
-    public function show($id)
+    public function show($zip, $street)
     {
-        //
+        $flyer = Flyer::locatedAt($zip, $street)->first();
+
+        return view('flyers.show', compact('flyer'));
     }
 
     /**
