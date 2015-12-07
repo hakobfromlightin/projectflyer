@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePhotosTable extends Migration
+class CreateFlyerPhotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,9 @@ class CreatePhotosTable extends Migration
             $table->integer('flyer_id')->unsigned();
             $table->foreign('flyer_id')->references('id')->on('flyers')->onDelete('cascade');
 
+            $table->string('name');
             $table->string('path');
+            $table->string('thumbnail_path');
             $table->timestamps();
         });
     }
