@@ -1,5 +1,6 @@
 /vendor
 /node_modules
+/public/images/photos/
 composer.phar
 Homestead.yaml
 Homestead.json
