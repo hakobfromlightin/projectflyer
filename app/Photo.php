@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Image;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -22,105 +21,17 @@ class Photo extends Model
      */
     protected $fillable = ['path', 'name', 'thumbnail_path'];
 
-
     /**
-     * The UploadedFile instance.
+     * Set name mutator.
      *
-     * @var array
+     * @param $name
      */
-    protected $file;
-
-
-    /**
-     * When a photo is created, prepare a thumbnail, too.
-     *
-     * @return void
-     */
-    protected static function boot()
+    public function setNameAttribute($name)
     {
-        static::creating(function($photo){
-            return $photo->upload();
-        });
-    }
+        $this->attributes['name'] = $name;
 
-    /**
-     * Make a new photo instance from an uploaded file.
-     *
-     * @param UploadedFile $file
-     * @return self
-     */
-    public static function fromFile(UploadedFile $file)
-    {
-        $photo = new static;
-
-        $photo->file = $file;
-
-        return $photo->fill([
-            'name' => $photo->fileName(),
-            'path' => $photo->filePath(),
-            'thumbnail_path' => $photo->thumbnailPath()
-        ]);
-    }
-
-    /**
-     * Move the photo to the proper folder.
-     *
-     * @return self
-     */
-    public function upload()
-    {
-        $this->file->move($this->baseDir(), $this->fileName());
-
-        $this->makeThumbnails();
-
-        return $this;
-    }
-
-    /**
-     * Make a thumbnail for the photo.
-     *
-     * @return void
-     */
-    private function makeThumbnails()
-    {
-        Image::make($this->filePath())
-            ->fit(200)
-            ->save($this->thumbnailPath());
-    }
-
-    /**
-     * Get the file name for the photo.
-     *
-     * @return string
-     */
-    public function fileName()
-    {
-        $name = sha1( time() . $this->file->getClientOriginalName());
-
-        $extension = $this->file->getClientOriginalExtension();
-
-        return "{$name}.{$extension}";
-    }
-
-    /**
-     * Get the path to the photo.
-     *
-     * @return string
-     */
-    public function filePath()
-    {
-        return $this->baseDir() . '/' . $this->fileName();
-    }
-
-
-    /**
-     * Get the path to the photo's thumbnail.
-     *
-     * @return string
-     */
-    public function thumbnailPath()
-    {
-        return $this->baseDir() . '/tn-' . $this->fileName();
+        $this->path = $this->baseDir(). '/' . $name;
+        $this->thumbnail_path = $this->baseDir(). '/tn-' . $name;
     }
 
     /**

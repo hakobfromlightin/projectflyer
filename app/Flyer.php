@@ -37,7 +37,7 @@ class Flyer extends Model
     }
 
     /**
-     * Get Price.
+     * Get Price accessor.
      *
      * @param $price
      * @return string
